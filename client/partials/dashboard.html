@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>List Polls</title>
+	</head>
+	<body>
+		<div ng-controller = "sessionController">
+			<h3><a href="#/create">Create o New Poll</a></h3>
+			<h3><a href="#/logout">logout</a></h3>
+		</div>
+		<h3>Current Polls:</h3>
+		<div ng-controller="surveyController">
+			Search: <input type="text" ng-model="searchSurveys">
+			<table>
+				<tr><th>Name</th>
+					<th>Survey Question</th>
+					<th>Date Posted</th>
+					<th>Action</th></tr>
+					<tr ng-repeat="survey in all_surveys | filter:searchSurveys">
+						<td>{{survey.author}}</td>
+						<td><a href="#/survey/{{survey._id}}">{{survey.question}}</a></td>
+						<td>{{survey.date |date: short}}</td>
+						<td><a href="/delete/{{survey._id}}"><button ng-if="survey.author ==curr_user.session.name">Delete</button></a></td>
+					</tr>
+				</table>
+			</div>
+	</body>
+</html>
